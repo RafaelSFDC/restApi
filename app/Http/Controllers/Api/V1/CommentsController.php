@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Comments;
 use App\Http\Requests\StoreCommentsRequest;
 use App\Http\Requests\UpdateCommentsRequest;
+use App\Http\Resources\V1\CommentsCollection;
+use App\Http\Resources\V1\CommentsResource;
 
 class CommentsController extends Controller
 {
@@ -15,7 +17,7 @@ class CommentsController extends Controller
     public function index()
     {
         //
-        return Comments::all();
+        return new CommentsCollection(Comments::paginate());
     }
 
     /**
@@ -37,9 +39,11 @@ class CommentsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comments $comments)
+    public function show($id)
     {
         //
+        $comments = Comments::findOrFail($id);
+        return new CommentsResource($comments);
     }
 
     /**

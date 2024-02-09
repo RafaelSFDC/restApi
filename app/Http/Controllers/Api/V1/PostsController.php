@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Http\Requests\StorePostsRequest;
 use App\Http\Requests\UpdatePostsRequest;
+use App\Http\Resources\V1\PostsCollection;
+use App\Http\Resources\V1\PostsResource;
 
 class PostsController extends Controller
 {
@@ -15,7 +17,7 @@ class PostsController extends Controller
     public function index()
     {
         //
-        return Posts::all();
+        return new PostsCollection(Posts::paginate());
     }
 
     /**
@@ -35,11 +37,12 @@ class PostsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.  
      */
-    public function show(Posts $posts)
+    public function show($id)
     {
-        //
+        $post = Posts::findOrFail($id);
+        return new PostsResource($post);
     }
 
     /**

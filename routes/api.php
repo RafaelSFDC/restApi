@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CategoriesController;
+use App\Http\Controllers\Api\V1\CommentsController;
+use App\Http\Controllers\Api\V1\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::group(['prefix' => 'v1', 'namespace' => 'App\Http\Controllers\Api\V1'], function () {
+    // Authentication
+    Route::apiResource('posts', PostsController::class);
+    Route::apiResource('comments', CommentsController::class);
+    Route::apiResource('categories', CategoriesController::class);
+
 });

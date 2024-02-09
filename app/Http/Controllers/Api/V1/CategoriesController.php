@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Categories;
 use App\Http\Requests\StoreCategoriesRequest;
 use App\Http\Requests\UpdateCategoriesRequest;
+use App\Http\Resources\V1\CategoriesCollection;
+use App\Http\Resources\V1\CategoriesResource;
 
 class CategoriesController extends Controller
 {
@@ -15,7 +17,7 @@ class CategoriesController extends Controller
     public function index()
     {
         //
-        return Categories::all();
+        return new CategoriesCollection(Categories::paginate());
     }
 
     /**
@@ -37,9 +39,11 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categories $categories)
+    public function show($id)
     {
         //
+        $categories = Categories::findOrFail($id);
+        return new CategoriesResource($categories);
     }
 
     /**
