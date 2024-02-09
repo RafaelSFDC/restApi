@@ -19,13 +19,13 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $filter = new PostsFilter();    
-        $queryItems = $filter->transform($request);
+        $filterItems = $filter->transform($request);
 
-        if(count($queryItems) > 0){
-            $posts = Posts::where($queryItems)->paginate();
-            return new PostsCollection($posts->appends($request->query()));
-        }
-        return new PostsCollection(Posts::paginate());
+        $includeComments = $request->query('includeComments');
+
+        $posts = Posts::where($filterItems)->paginate();
+        return new PostsCollection($posts->appends($request->query()));
+
     }
 
     /**
@@ -49,8 +49,9 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Posts::findOrFail($id);
+        $post = Posts::with('comments')->findOrFail($id); // assuming the comments relationship is named 'comments'
         return new PostsResource($post);
+
     }
 
     /**

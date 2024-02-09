@@ -19,10 +19,9 @@ class CommentsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
-            'content' => fake()->sentence(),
+            'content' => $this->faker->sentence,
             'user_id' => User::all()->random()->id,
-            'post_id' => Posts::all()->random()->id
+            'post_id' => Posts::all()->random()->id,
         ];
     }
 }

@@ -9,14 +9,11 @@ class Comments extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'post_id',
-        'user_id',
-        'body'
-    ];
+    protected $foreignKey = 'post_id';
 
-    public function post(){
-        return $this->belongsTo(Posts::class);
+    public function post()
+    {
+        return $this->belongsTo(Posts::class, 'post_id', 'id');
     }
 
     public function user(){
