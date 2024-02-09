@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Filters\V1\PostsFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Http\Requests\StorePostsRequest;
 use App\Http\Requests\UpdatePostsRequest;
 use App\Http\Resources\V1\PostsCollection;
 use App\Http\Resources\V1\PostsResource;
-use App\Services\V1\CustomQuery;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -18,7 +18,7 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = new CustomQuery();
+        $filter = new PostsFilter();
         $queryItems = $filter->transform($request);
 
         if(count($queryItems) > 0){
