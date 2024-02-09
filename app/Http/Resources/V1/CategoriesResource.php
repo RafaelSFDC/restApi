@@ -18,8 +18,6 @@ class CategoriesResource extends JsonResource
         return [
             'id' => $this->id,
             'content' => $this->name,
-            'userId' => $this->user_id,
-            'postId' => $this->post_id,
         ];
     }
 }
