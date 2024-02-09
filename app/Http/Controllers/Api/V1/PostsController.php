@@ -8,15 +8,22 @@ use App\Http\Requests\StorePostsRequest;
 use App\Http\Requests\UpdatePostsRequest;
 use App\Http\Resources\V1\PostsCollection;
 use App\Http\Resources\V1\PostsResource;
+use App\Services\V1\CustomQuery;
+use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filter = new CustomQuery();
+        $queryItems = $filter->transform($request);
+
+        if(count($queryItems) > 0){
+            return new PostsCollection(Posts::where($queryItems)->paginate());
+        }
         return new PostsCollection(Posts::paginate());
     }
 
