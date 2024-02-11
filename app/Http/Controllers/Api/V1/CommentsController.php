@@ -22,11 +22,8 @@ class CommentsController extends Controller
         $filter = new CommentsFilter();    
         $queryItems = $filter->transform($request);
 
-        if(count($queryItems) > 0){
-            $comments = Comments::where($queryItems)->paginate();
-            return new CommentsCollection($comments->appends($request->query()));
-        }
-        return new CommentsCollection(Comments::paginate());
+        $comments = Comments::where($queryItems)->paginate();
+        return new CommentsCollection($comments->appends($request->query()));
     }
 
     /**

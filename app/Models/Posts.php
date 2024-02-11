@@ -10,6 +10,14 @@ class Posts extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'body',
+        'image',
+        'user_id',
+        'category_id',
+        'status'
+    ];
 
     public function comments()
     {

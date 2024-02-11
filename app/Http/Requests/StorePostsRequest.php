@@ -11,7 +11,7 @@ class StorePostsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StorePostsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'body' => 'required',
+            'image' => 'required',
+            'userId' => 'required',
+            'categoryId' => 'required',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->userId,
+            'category_id' => $this->categoryId
+        ]);
     }
 }
