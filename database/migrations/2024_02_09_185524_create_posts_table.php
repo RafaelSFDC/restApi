@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('content');
             $table->string('image');
+            $table->integer('likes');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->softDeletes();

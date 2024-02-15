@@ -22,6 +22,7 @@ class PostsFactory extends Factory
             'title' => fake()->sentence(),
             'content' => fake()->paragraph(),
             'image' => fake()->imageUrl(),
+            'likes' => fake()->numberBetween(0, 100),
             'user_id' => User::factory()->create()->id,
             'category_id' => fake()->numberBetween(1, 5),
         ];

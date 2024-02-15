@@ -13,7 +13,28 @@ class CategoriesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        Categories::factory(10)->create();
+        Categories::factory()->create([
+            'name' => "Web Developer"
+        ]);
+        
+        Categories::factory()->create([
+            'name' => "Backend Developer"
+        ]);
+        
+        Categories::factory()->create([
+            'name' => "Mobile Developer"
+        ]);
+        
+        Categories::factory()->create([
+            'name' => "Full Stack Developer"
+        ]);
+        
+        Categories::factory()->create([
+            'name' => "Designer"
+        ]);
+        
+        Categories::factory()->create([
+            'name' => "Other"
+        ]);
     }
 }

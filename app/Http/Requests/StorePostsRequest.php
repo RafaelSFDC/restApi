@@ -21,12 +21,23 @@ class StorePostsRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = $this->method();
+
+        if ($method == 'PUT') {
+            return [
+                'title' => 'required',
+                'body' => 'required',
+                'image' => 'required',
+                'userId' => 'required',
+                'categoryId' => 'required',
+            ];
+        }
+
         return [
-            'title' => 'required',
-            'body' => 'required',
-            'image' => 'required',
-            'userId' => 'required',
-            'categoryId' => 'required',
+            'title' => ['sometimes', 'required'],
+            'body' =>  ['sometimes', 'required'],
+            'image' =>  ['sometimes', 'required'],
+            'categoryId' =>  ['sometimes', 'required'],
         ];
     }
 

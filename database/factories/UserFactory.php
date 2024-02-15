@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'role' => 'user',
             'status' => 'active',
             'username' => fake()->unique()->username(),
-            'category' => fake()->word(),
+            'category' => fake()->numberBetween(1, 5),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'image' => fake()->imageUrl(),

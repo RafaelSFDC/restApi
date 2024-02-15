@@ -16,9 +16,11 @@ class CategoriesFactory extends Factory
      */
     public function definition(): array
     {
+        
         return [
-            'name' => ["Web Developer", "Backend Developer", "Mobile Developer", "Full Stack Developer", "Designer", "Other"][rand(0, 5)],
-            'description' => fake()->sentence(),
+            'name' => $this->faker->randomElement(["Web Developer", "Backend Developer", "Mobile Developer", "Full Stack Developer", "Designer", "Other"]),
+            'description' => $this->faker->sentence(),
         ];
+        
     }
 }

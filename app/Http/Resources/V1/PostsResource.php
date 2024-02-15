@@ -18,10 +18,13 @@ class PostsResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'body' => $this->body,
+            'content' => $this->content,
             'image' => $this->image,
+            'likes' => $this->likes,
             'userId' => $this->user_id,
-            'category' => $this->category_id,
+            'userName' => $this->user->name,
+            'userImage' => $this->user->image,
+            'category' => $this->category->name,
             'comments' => CommentsResource::collection($this->comments)
         ];
     }
