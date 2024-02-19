@@ -11,6 +11,12 @@ class Comments extends Model
 
     protected $foreignKey = 'post_id';
 
+    protected $fillable = [
+        'content',
+        'post_id',
+        'user_id',
+    ];
+
     public function post()
     {
         return $this->belongsTo(Posts::class, 'post_id', 'id');

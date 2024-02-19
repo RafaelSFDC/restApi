@@ -11,7 +11,7 @@ class StoreCommentsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,18 @@ class StoreCommentsRequest extends FormRequest
     {
         return [
             //
+
+            'content' => 'required',
+            'postId' => 'required',
+            'userId' => 'required',
         ];
+    }
+
+    protected function prepareForValidation(){
+
+        $this->merge([
+            'user_id' => $this->userId,
+            'post_id' => $this->postId
+        ]);
     }
 }
