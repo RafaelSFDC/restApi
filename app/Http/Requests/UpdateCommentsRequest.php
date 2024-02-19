@@ -11,7 +11,7 @@ class UpdateCommentsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,15 @@ class UpdateCommentsRequest extends FormRequest
     {
         return [
             //
+            'content' => 'required'
         ];
+    }
+
+    protected function prepareForValidation(){
+
+        $this->merge([
+            'user_id' => $this->userId,
+            'post_id' => $this->postId
+        ]);
     }
 }

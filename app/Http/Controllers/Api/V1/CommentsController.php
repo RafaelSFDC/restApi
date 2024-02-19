@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateCommentsRequest;
 use App\Http\Resources\V1\CommentsCollection;
 use App\Http\Resources\V1\CommentsResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CommentsController extends Controller
 {
@@ -64,9 +65,11 @@ class CommentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCommentsRequest $request, Comments $comments)
-    {
-        //
+    public function update(UpdateCommentsRequest $request, $id)
+    {   
+        $comments = Comments::findOrFail($id);
+        $comments->update(['content' => $request->content]);
+        return response()->json($comments);
     }
 
     /**
