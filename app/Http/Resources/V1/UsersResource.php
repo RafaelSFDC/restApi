@@ -13,7 +13,11 @@ class UsersResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
-        return parent::toArray($request);
-    }
+{
+    $data = parent::toArray($request);
+    
+    $data['category'] = $this->category->content;
+    
+    return $data;
+}
 }

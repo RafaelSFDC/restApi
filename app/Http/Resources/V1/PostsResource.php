@@ -21,11 +21,14 @@ class PostsResource extends JsonResource
             'content' => $this->content,
             'image' => $this->image,
             'likes' => $this->likes,
+            'user' => $this->user,
             'userId' => $this->user_id,
             'userName' => $this->user->name,
             'userImage' => $this->user->image,
             'category' => $this->category->name,
-            'comments' => CommentsResource::collection($this->comments)
+            'comments' => CommentsResource::collection($this->comments),
+            'updatedAt' => $this->updated_at->toIso8601String(),
+            'createdAt' => $this->created_at->toIso8601String(),
         ];
     }
 }

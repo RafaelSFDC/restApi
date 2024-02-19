@@ -20,11 +20,14 @@ class CommentsResource extends JsonResource
             'content' => $this->content,
             'userId' => $this->user_id,
             'userName' => $this->user->name,
+            'user' => $this->user,
             'userEmail' => $this->user->email,
             'image' => $this->user->image,
             'description' => $this->user->description,
             'category' => $this->user->category,
             'postId' => $this->post_id,
+            'updatedAt' => $this->updated_at->toIso8601String(),
+            'createdAt' => $this->created_at->toIso8601String()
         ];
     }
 }

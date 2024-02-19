@@ -52,4 +52,7 @@ class User extends Authenticatable
         return $this->hasMany(Comments::class);
     }
 
+    public function category(){
+        return $this->hasOne(Categories::class);
+    }
 }
