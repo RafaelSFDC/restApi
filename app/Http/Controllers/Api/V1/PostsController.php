@@ -65,16 +65,28 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostsRequest $request, Posts $posts)
+    public function update(UpdatePostsRequest $request, $id)
     {
         //
+        $post = Posts::find($id);
+        if(!$post){
+            return response()->json(['message' => 'Post não encontrado'], 404);
+        }
+            $post->update($request->all());
+            return response()->json($post);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Posts $posts)
+    public function destroy($id)
     {
-        //
+        $posts = Posts::find($id);
+        if(!$posts){
+            return response()->json(['message' => 'Post não encontrado'], 404);
+        }
+         $posts->delete();
+        return response()->json(['message' => 'Post deletado com sucesso']);
     }
 }

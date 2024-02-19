@@ -67,7 +67,10 @@ class CommentsController extends Controller
      */
     public function update(UpdateCommentsRequest $request, $id)
     {   
-        $comments = Comments::findOrFail($id);
+        $comments = Comments::find($id);
+        if(!$comments){
+            return response()->json(['message' => 'Comentário não encontrado'], 404);
+        }
         $comments->update(['content' => $request->content]);
         return response()->json($comments);
     }
@@ -75,8 +78,13 @@ class CommentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comments $comments)
+    public function destroy($id)
     {
-        //
+        $comments = Comments::find($id);
+        if(!$comments){
+            return response()->json(['message' => 'Comentário não encontrado'], 404);
+        }
+         $comments->delete();
+        return response()->json(['message' => 'Comentário deletado com sucesso']);
     }
 }
